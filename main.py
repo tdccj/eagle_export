@@ -28,7 +28,9 @@ def fenlei(type1):
 
 def dabao(a, sft, num1):
     print(sft)
-    data_w = open(export + "\\" + sft + "\\" + str(num1) + "_" + os.path.splitext(path_jvbu[0])[0] + ".txt", "w")
+    sourec_name = a[(a.find("name")+7):(a.find("size")-3)]
+    print(sourec_name)
+    data_w = open(export + "\\" + sft + "\\" + str(num1) + "_" + sourec_name + ".txt", "w")
     data_w.write(a)
     data_w.close()
 
