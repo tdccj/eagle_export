@@ -11,7 +11,7 @@ def fenlei(type1):
     if type1 in ('.jpg', '.png', '.jpeg', '.webp'):
         if b >= 1:
             pass
-        elif v > 1:
+        elif v >= 1:
             pass
         else:
             print("照片")
@@ -28,9 +28,9 @@ def fenlei(type1):
         v = 1
 
     else:
-        if b > 1:
+        if b >= 1:
             pass
-        elif v > 1:
+        elif v >= 1:
             pass
         else:
             print("无法分类")
@@ -41,17 +41,18 @@ def dabao(a, sft, num1, selfname, export, path):
     # print(sft)
     sourec_name = a[(a.find("name") + 7):(a.find("size") - 3)]
     print(sourec_name)
+    num1 = num+2
 
     # 写入描述文件
     data_w = open(export + "\\" + sft + "\\" + str(num1) + "_" + sourec_name + ".txt", "w")
     print(export + "\\" + sft + "\\" + str(num1) + "_" + sourec_name + ".txt")
-    data_w.write(a[(a.find('"name":"') + 8):a.find('","size"')])  # name
+    data_w.write('#name:'+a[(a.find('"name":"') + 8):a.find('","size"')])  # name
     data_w.write("\n")
-    data_w.write(a[(a.find('"tags":[') + 8):a.find('],"folders"')])  # tag
+    data_w.write('#tag:'+a[(a.find('"tags":[') + 8):a.find('],"folders"')])  # tag
     data_w.write("\n")
-    data_w.write(a[(a.find('"url":"') + 7):a.find('","annotation"')])  # url
+    data_w.write('#url:'+a[(a.find('"url":"') + 7):a.find('","annotation"')])  # url
     data_w.write("\n")
-    data_w.write(a[(a.find('"annotation":"') + 14):a.find('","modificationTime"')])  # annotation 注释
+    data_w.write('#annotation:'+a[(a.find('"annotation":"') + 14):a.find('","modificationTime"')])  # annotation 注释
     data_w.write("\n")
     data_w.write("\n")
     data_w.write(a)
@@ -60,7 +61,7 @@ def dabao(a, sft, num1, selfname, export, path):
     # 复制源文件
     for k in selfname:
         b = path_image + "\\" + path[num] + "\\" + k
-        c = export + "\\" + sft + "\\" + str(num) + "_" + k
+        c = export + "\\" + sft + "\\" + str(num1) + "_" + k
         print(b, c)
         shutil.copyfile(b, c)
 
@@ -88,10 +89,11 @@ trymkdir("url")
 num = -1
 for j in path:
     b = 0
+    v = 0
     self_name = []
 
     path_jvbu = os.listdir(path_image + '\\' + path[num])
-    print(num)
+    # print(num)
     # print(path_jvbu)
     for i in path_jvbu:
         file_type = os.path.splitext(i)[1]
