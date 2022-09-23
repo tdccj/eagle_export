@@ -57,8 +57,8 @@ def dabao(a, sft, num1, selfname, export, path):
 
 sourec_ft = 0
 a = 0
-path_image = r"Z:\shu jv ku\军事.library\images"  # input("输入image文件夹路径")
-export = r"Z:\临时文件\59\ZTZ-59"  # input("请输入输出文件夹")
+path_image = input("输入image文件夹路径")
+export = input("请输入输出文件夹")
 path = os.listdir(path_image)
 # print(path)
 os.mkdir(export + "\\" + "photo")
