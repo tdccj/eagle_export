@@ -31,10 +31,23 @@ def dabao(a, sft, num1, selfname, export, path):
     # print(sft)
     sourec_name = a[(a.find("name") + 7):(a.find("size") - 3)]
     print(sourec_name)
+
+    # 写入描述文件
     data_w = open(export + "\\" + sft + "\\" + str(num1) + "_" + sourec_name + ".txt", "w")
     print(export + "\\" + sft + "\\" + str(num1) + "_" + sourec_name + ".txt")
+    data_w.write(a[(a.find('"name":"')+8):a.find('","size"')])  # name
+    data_w.write("\n")
+    data_w.write(a[(a.find('"tags":[') + 8):a.find('],"folders"')])    # tag
+    data_w.write("\n")
+    data_w.write(a[(a.find('"url":"') + 7):a.find('","annotation"')])   # url
+    data_w.write("\n")
+    data_w.write(a[(a.find('"annotation":"') + 14):a.find('","modificationTime"')])   # annotation 注释
+    data_w.write("\n")
+    data_w.write("\n")
     data_w.write(a)
     data_w.close()
+
+    # 复制源文件
     for k in selfname:
         b = path_image + "\\" + path[num] + "\\" + k
         c = export + "\\" + sft + "\\" + str(num) + "_" + k
