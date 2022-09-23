@@ -6,22 +6,26 @@ import time
 
 
 def fenlei(type1):
-    global sourec_ft
+    global sourec_ft, b
     if type1 in ('.jpg', '.png', '.jpeg', '.webp'):
-        print("照片")
-        sourec_ft = "photo"
+        if b == 1:
+            pass
+        else:
+            print("照片")
+            sourec_ft = "photo"
 
     elif type1 == '.url':
         print("网页")
         sourec_ft = "url"
+        b = 1
     else:
         print("无法分类")
         sourec_ft = "other"
 
-def dabao(a):
 
-
-    data_w = open(export + "\\" + os.path.splitext(path_jvbu[0])[0] + ".txt", "w")  # 此处并不能保证不出错
+def dabao(a, sft, num1):
+    print(sft)
+    data_w = open(export + "\\" + sft + "\\" + str(num1) + "_" + os.path.splitext(path_jvbu[0])[0] + ".txt", "w")
     data_w.write(a)
     data_w.close()
 
@@ -30,8 +34,12 @@ path_image = r"Z:\shu jv ku\军事.library\images"  # input("输入image文件�
 export = r"Z:\临时文件\59\ZTZ-59"  # input("请输入输出文件夹")
 path = os.listdir(path_image)
 print(path)
+os.mkdir(export + "\\" + "photo")
+os.mkdir(export + "\\" + "url")
+os.mkdir(export + "\\" + "other")
 num = -1
 for j in path:
+    b = 0
     path_jvbu = os.listdir(path_image + '\\' + path[num])
     num = num + 1
     # print(path_jvbu)
@@ -40,13 +48,14 @@ for j in path:
         file_type = os.path.splitext(i)[1]
 
         if file_type == '.json':
+            print("json")
             print(path_image + '\\' + path[num] + '\\' + i)
             data = open(path_image + '\\' + path[num] + '\\' + i, 'r', encoding='utf-8')
             a = data.read()
             print("a", a)
             data.close()
 
-
         elif file_type != '.json':
             print(file_type)
             fenlei(file_type)
+    dabao(a, sourec_ft, num)
