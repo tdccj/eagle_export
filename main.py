@@ -8,19 +8,22 @@ import time
 def fenlei(type1):
     global sourec_ft, b
     if type1 in ('.jpg', '.png', '.jpeg', '.webp'):
-        if b == 1:
+        if b >= 1:
             pass
         else:
             print("照片")
             sourec_ft = "photo"
 
-    elif type1 == '.url':
+    elif type1 in ('.url','.db'):
         print("网页")
         sourec_ft = "url"
         b = 1
     else:
-        print("无法分类")
-        sourec_ft = "other"
+        if b > 1:
+            pass
+        else:
+            print("无法分类")
+            sourec_ft = "other"
 
 
 def dabao(a, sft, num1):
@@ -42,6 +45,7 @@ for j in path:
     b = 0
     path_jvbu = os.listdir(path_image + '\\' + path[num])
     num = num + 1
+    print(num)
     # print(path_jvbu)
     for i in path_jvbu:
         # print(i)
