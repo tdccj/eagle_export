@@ -10,7 +10,7 @@ path_images = 'none'
 path_export = 'none'
 folder_images = []
 file_metadata = 'none'
-folders = {}   # 文件夹字典
+folders = {}  # 文件夹字典
 
 
 # 寻找地址
@@ -134,30 +134,39 @@ def classify_the_files():
         path_metadata = path_image + r"\\metadata.json"  # 获取详情文件路径
         with open(path_metadata, 'r', encoding='utf-8') as metadata:
             file_metadata = metadata.read()
-        image_folder_id = file_metadata[file_metadata.find('"folders":[')+len('"folders":['):file_metadata.find('],"isDeleted":')]
-        num = num+1
+        image_folder_id = file_metadata[
+                          file_metadata.find('"folders":[') + len('"folders":['):file_metadata.find('],"isDeleted":')]
+        num = num + 1
 
         # 删除多余的引号
-        image_folder_id = image_folder_id.replace('"','')
-        # print(image_folder_id)
+        image_folder_id = image_folder_id.replace('"', '')
 
         # 处理单个文件多文件夹
         i = 0
         folder_image = []
         while i != -1:
-            i = image_folder_id.find(',',i+1)
+            i = image_folder_id.find(',', i + 1)
             # print(image_folder_id)
             # print(i)
+
+            # 当没有逗号时直接复制
             if i != -1:
                 folder_image.append(image_folder_id[:i])
             else:
                 folder_image.append(image_folder_id)
-            image_folder_id = image_folder_id[i+1:]
-            print(1,folder_image)
+
+            image_folder_id = image_folder_id[i + 1:]
+            print(image_folder_id)
+
 
         for folder_id in folder_image:
+
+            # 解决意外出现的空值
+            if folder_id == '':
+                continue
+
             path = folders[folder_id]['path']
-            # print(path)
+            print(path)
 
 
 def main():
