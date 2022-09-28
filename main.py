@@ -50,7 +50,7 @@ def classify_the_files():
         path_metadata = path_image + r"\\metadata.json"  # 获取详情文件路径
         with open(path_metadata, 'r', encoding='utf-8') as metadata:
             file_metadata = metadata.read()
-        print(file_metadata.find('"folders":["'))
+        image_folder_id = file_metadata
 
 
 def main():
