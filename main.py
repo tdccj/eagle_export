@@ -28,10 +28,10 @@ def looking_for():
 
 # 读取文件夹源文件并创建对应文件夹
 def read_the_folder_metadata():
-    path_folderdata = path_library + r'\\mtime.json'
+    path_folderdata = path_library + r'\\metadata.json'
     with open(path_folderdata, 'r') as data:
         file_folderdata = data.read()
-    file_folderdata
+    filename = file_folderdata
 
 # 读取images文件夹内信息
 def read_the_imagesfolder():
