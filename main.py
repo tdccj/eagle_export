@@ -16,15 +16,14 @@ folders = {}  # 文件夹字典
 # 寻找地址
 def looking_for():
     global path_images, path_export, path_library
-    # path_library = input("输入library文件夹路径")
-    path_library = r'Z:\shu jv ku\军事.library'
+    path_library = input("输入library文件夹路径")
     path_images = path_library + r'\images'
     if path_images[-6:] == "images":
         pass
     else:
         print("路径错误")
-    # path_export = input("请输入输出文件夹")
-    path_export = r'Z:\临时文件\导出测试'
+    path_export = input("请输入输出文件夹")
+
 
 
 # 读取文件夹源文件并创建对应文件夹
