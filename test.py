@@ -52,19 +52,37 @@ print(a)
 
 kpath = path_export
 name = 'none'
+folders = {}
+
 for i in a:
     knum = int(i[:-1])
     kchar = i[-1:]
     # print(knum,kchar)
 
+    # 如果是前大括号
     if kchar == '{':
+        # 将name和id写入字典
         name = data[data.find('"name":', knum) + 8:data.find('"children":', knum) - 1]
-        name =
+        folder = data[data.find('"id":"', knum) + len('"id":"'):data.find('","name":', knum)]
+        folders[folder] = {}
+        folders[folder]['name'] = name
+
+        # 前进一个文件夹
         kpath = kpath + '\\' + name
+        # 将path写入字典
+        folders[folder]['path'] = kpath
+
         print(knum, 'yes', kpath)
 
-        os.mkdir(kpath)
+        # 如果文件夹已经存在，则报错error后继续执行
+        try:
+            os.mkdir(kpath)
+        except FileExistsError:
+            print("error")
 
+    # 如果是后大括号，则退后一个文件夹
     elif kchar == '}':
         kpath = kpath[:kpath.rfind('\\')]
         print(knum, 'no', kpath)
+
+print(folders)
