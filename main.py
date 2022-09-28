@@ -126,6 +126,7 @@ def classify_the_files():
     global file_metadata, folder_images
 
     num = 0
+    filenum = 1
 
     for folder_image in folder_images:
 
@@ -144,6 +145,7 @@ def classify_the_files():
         # 处理单个文件多文件夹
         i = 0
         folder_image = []
+
         while i != -1:
             i = image_folder_id.find(',', i + 1)
             # print(image_folder_id)
@@ -158,15 +160,31 @@ def classify_the_files():
             image_folder_id = image_folder_id[i + 1:]
             print(image_folder_id)
 
-
         for folder_id in folder_image:
 
             # 解决意外出现的空值
             if folder_id == '':
                 continue
 
-            path = folders[folder_id]['path']
-            print(path)
+            path_export_image = folders[folder_id]['path']
+            print(path_export_image)
+            image_folder = os.listdir(path_image)
+
+            for file in image_folder:
+                if file == 'metadata.json':
+                    continue
+                file = str(filenum) + '-' + file
+                filename = os.path.splitext(file)[0]
+                print(filename)
+                path1 = path_image + '\\' + file
+                path2 = path_export_image + '\\' + file
+                print(path1,path2)
+                shutil.copy(path1,path2)
+            file = image_folder[image_folder.index('metadata.json')]
+            file = str(filenum) + '-' + file
+            shutil.copy(path_image + '\\' + file, path_export_image + '\\' + file)
+
+        filenum = filenum + 1
 
 
 def main():
