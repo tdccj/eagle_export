@@ -18,7 +18,7 @@ def looking_for():
     global path_images, path_export, path_library
     # path_library = input("输入library文件夹路径")
     path_library = r'Z:\shu jv ku\军事.library'
-    path_images = path_library + r'\\images'
+    path_images = path_library + r'\images'
     if path_images[-6:] == "images":
         pass
     else:
@@ -173,16 +173,16 @@ def classify_the_files():
             for file in image_folder:
                 if file == 'metadata.json':
                     continue
-                file = str(filenum) + '-' + file
-                filename = os.path.splitext(file)[0]
+                newfile = str(filenum) + '-' + file
+                filename = os.path.splitext(newfile)[0]
                 print(filename)
                 path1 = path_image + '\\' + file
-                path2 = path_export_image + '\\' + file
+                path2 = path_export_image + '\\' + newfile
                 print(path1,path2)
                 shutil.copy(path1,path2)
-            file = image_folder[image_folder.index('metadata.json')]
-            file = str(filenum) + '-' + file
-            shutil.copy(path_image + '\\' + file, path_export_image + '\\' + file)
+            newfile = image_folder[image_folder.index('metadata.json')]
+            newfile = str(filenum) + '-' + file
+            shutil.copy(path_image + '\\' + file, path_export_image + '\\' + newfile)
 
         filenum = filenum + 1
 
