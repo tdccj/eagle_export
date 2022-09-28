@@ -170,6 +170,7 @@ def classify_the_files():
             print(path_export_image)
             image_folder = os.listdir(path_image)
 
+            # 复制文件
             newfile = ''
             for file in image_folder:
                 if file == 'metadata.json':
@@ -180,6 +181,7 @@ def classify_the_files():
                 print(path1,path2)
                 shutil.copy(path1,path2)
 
+            # 单独复制metadata文件
             filename = os.path.splitext(newfile)[0]
             file = image_folder[image_folder.index('metadata.json')]
             newfile = filename+'.json'
