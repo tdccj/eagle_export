@@ -9,28 +9,24 @@ with open(path_folderdata, 'r') as data:
 data = file_folderdata[:file_folderdata.find(',"smartFolders":')]
 data = data[data.find('{"folders":') + 11:]
 metadata = data
-# print(data)
+print(data)
 
 
 j = 0
-words = ['"description":"",']
+words = ['"description":"",','"password":"","passwordTips":""','"tags":[],sswordTips":""']
 for word in words:
     # print(word)
     i = 0
     num = 0
     while i != -1:
         i = data.find(word, j)
-        data = data[:j]+data[j+17:]
-        print(data[:j],data[j+17:])
+        data = data[:i] + data[i + 17:]
+        print(data[:i])
         j = i + 1
         num = num + 1
     #     print('num:' + str(num))
     #     print(i)
-    # print(data1)
-
-
-
-
+    print(data)
 
 #
 #
