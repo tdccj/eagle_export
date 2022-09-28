@@ -52,23 +52,15 @@ name = 'none'
 for i in a:
     knum = int(i[:-1])
     kchar = i[-1:]
-
     # print(knum,kchar)
-    print('!!!')
+
     if kchar == '{':
-        print(knum,'yes')
-        name = data[data.find('"name":',knum)+8:data.find('"children":',knum)-1]
-        print(6,data.find('"name":',knum)+8,data.find('"children":',knum)-1)
-        kpath = kpath+'\\'+name
-        print(1,name)
-        print(2,kpath)
+        name = data[data.find('"name":', knum) + 8:data.find('"children":', knum) - 1]
+        kpath = kpath + '\\' + name
+        print(knum, 'yes', kpath)
 
-    elif kchar =='}':
-        print(knum,'no')
-        print(5,kpath)
+        os.mkdir(kpath)
+
+    elif kchar == '}':
         kpath = kpath[:kpath.rfind('\\')]
-        print(4,name)
-        print(3,kpath)
-
-
-
+        print(knum, 'no', kpath)
