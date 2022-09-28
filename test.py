@@ -1,9 +1,9 @@
 import os
 import shutil
 
-path_folderdata = r'Z:\临时文件\测试.library' + r'\\metadata.json'
+path_folderdata = r'Z:\临时文件\测试.library'
 path_export = r'Z:\临时文件\导出测试'
-with open(path_folderdata, 'r') as data:
+with open(path_folderdata, 'r',encoding='utf-8') as data:
     file_folderdata = data.read()
 
 # 用于剔除多余的信息
