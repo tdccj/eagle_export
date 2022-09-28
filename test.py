@@ -1,9 +1,12 @@
 import os
 import shutil
 
-path_folderdata = r'Z:\临时文件\测试.library'
+path_library = r'Z:\shu jv ku\军事.library'
 path_export = r'Z:\临时文件\导出测试'
-with open(path_folderdata, 'r',encoding='utf-8') as data:
+# ——————————————————————————————————————————————————————————————————————————
+
+path_folderdata = path_library + r'\\metadata.json'
+with open(path_folderdata, 'r', encoding='utf-8') as data:
     file_folderdata = data.read()
 
 # 用于剔除多余的信息
@@ -56,6 +59,7 @@ for i in a:
 
     if kchar == '{':
         name = data[data.find('"name":', knum) + 8:data.find('"children":', knum) - 1]
+        name =
         kpath = kpath + '\\' + name
         print(knum, 'yes', kpath)
 

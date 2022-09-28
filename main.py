@@ -29,9 +29,10 @@ def looking_for():
 # 读取文件夹源文件并创建对应文件夹
 def read_the_folder_metadata():
     path_folderdata = path_library + r'\\metadata.json'
-    with open(path_folderdata, 'r') as data:
+    with open(path_folderdata, 'r',encoding='utf-8') as data:
         file_folderdata = data.read()
     filename = file_folderdata
+
 
 # 读取images文件夹内信息
 def read_the_imagesfolder():
@@ -49,7 +50,7 @@ def classify_the_files():
         path_metadata = path_image + r"\\metadata.json"  # 获取详情文件路径
         with open(path_metadata, 'r', encoding='utf-8') as metadata:
             file_metadata = metadata.read()
-        print(file_metadata.find("size"))
+        print(file_metadata.find('"folders":["'))
 
 
 def main():
