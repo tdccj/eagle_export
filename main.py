@@ -25,7 +25,6 @@ def looking_for():
     path_export = input("请输入输出文件夹")
 
 
-
 # 读取文件夹源文件并创建对应文件夹
 def read_the_folder_metadata():
     global folders
@@ -177,15 +176,33 @@ def classify_the_files():
                 newfile = str(filenum) + '-' + file
                 path1 = path_image + '\\' + file
                 path2 = path_export_image + '\\' + newfile
-                print(path1,path2)
-                shutil.copy(path1,path2)
+                print(path1, path2)
+                shutil.copy(path1, path2)
 
             # 单独复制metadata文件
             filename = os.path.splitext(newfile)[0]
             file = image_folder[image_folder.index('metadata.json')]
-            newfile = filename+'.json'
+            newfile = filename + '.json'
             print(newfile)
             shutil.copy(path_image + '\\' + file, path_export_image + '\\' + newfile)
+
+            # 重构metadata文件
+
+            with open(path_export_image + '\\' + newfile, 'r', encoding='utf-8') as data:
+                data_r = data.read()
+            with open(path_export_image + '\\' + newfile, 'w') as data_w:
+                data_w.write('#name: ' + data_r[(data_r.find('"name":"') + 8):data_r.find('","size"')])  # name
+                data_w.write("\n")
+                data_w.write('#tag: ' + data_r[(data_r.find('"tags":[') + 8):data_r.find('],"folders"')])  # tag
+                data_w.write("\n")
+                data_w.write('#url: ' + data_r[(data_r.find('"url":"') + 7):data_r.find('","annotation"')])  # url
+                data_w.write("\n")
+                data_w.write(
+                    '#annotation: ' + data_r[(data_r.find('"annotation":"') + 14):data_r.find(
+                        '","modificationTime"')])  # annotation 注释
+                data_w.write("\n")
+                data_w.write("\n")
+                data_w.write(data_r)
 
         filenum = filenum + 1
 
